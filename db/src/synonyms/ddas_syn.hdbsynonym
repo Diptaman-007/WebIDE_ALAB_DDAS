@@ -1,0 +1,8 @@
+{
+  "DIPTAMANDAS_ALAB.db.synonyms::DIM_EMPLOYEE_BIG_METRICS_PII_DAILY": {
+    "target": {
+      "object": "DIM_EMPLOYEE_BIG_METRICS_PII_DAILY",
+      "schema": "DIPTAMDAS"
+    }
+  }
+}
