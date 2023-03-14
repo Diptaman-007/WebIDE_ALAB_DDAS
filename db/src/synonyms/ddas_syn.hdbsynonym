@@ -1,8 +1,57 @@
 {
-  "DIPTAMANDAS_ALAB.db.synonyms::DIM_EMPLOYEE_BIG_METRICS_PII_DAILY": {
+  "DIPTAMANDAS_ALAB.db.synonyms::SYN_DIM_EMPLOYEE_BIG_METRICS_PII_DAILY": {
     "target": {
       "object": "DIM_EMPLOYEE_BIG_METRICS_PII_DAILY",
       "schema": "DIPTAMDAS"
+    }
+  },
+  "DIPTAMANDAS_ALAB.db.synonyms::SYN_DIM_EMPLOYEE": {
+    "target": {
+      "object": "DIM_EMPLOYEE",
+      "schema": "DIPTAMDAS",
+      "database": "HWX"
+    }
+  },
+  "DIPTAMANDAS_ALAB.db.synonyms::SYN_EMPLOYEE_COMPENSATION_HIST": {
+    "target": {
+      "object": "COMPENSATION_HISTORY",
+      "schema": "DIPTAMDAS",
+      "database": "HWX"
+    }
+  },
+  "DIPTAMANDAS_ALAB.db.synonyms::SYN_TCURR": {
+    "target": {
+      "object": "TCURR",
+      "schema": "DIPTAMDAS",
+      "database": "HWX"
+    }
+  },
+  "DIPTAMANDAS_ALAB.db.synonyms::SYN_TCURV": {
+    "target": {
+      "object": "TCURV",
+      "schema": "DIPTAMDAS",
+      "database": "HWX"
+    }
+  },
+  "DIPTAMANDAS_ALAB.db.synonyms::SYN_TCURF": {
+    "target": {
+      "object": "TCURF",
+      "schema": "DIPTAMDAS",
+      "database": "HWX"
+    }
+  },
+  "DIPTAMANDAS_ALAB.db.synonyms::SYN_TCURN": {
+    "target": {
+      "object": "TCURN",
+      "schema": "DIPTAMDAS",
+      "database": "HWX"
+    }
+  },
+  "DIPTAMANDAS_ALAB.db.synonyms::SYN_TCURX": {
+    "target": {
+      "object": "TCURX",
+      "schema": "DIPTAMDAS",
+      "database": "HWX"
     }
   }
 }

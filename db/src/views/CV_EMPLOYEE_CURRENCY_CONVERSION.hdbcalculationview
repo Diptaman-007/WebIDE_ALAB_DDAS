@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Privilege="http://www.sap.com/ndb/BiModelPrivilege.ecore" id="DIPTAMANDAS_ALAB.db.views::CV_EMPLOYEE_CURRENCY_CONVERSION" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_EMPLOYEE_BASE"/>
+<localVariables>
+  <variable id="IP_EMPLOYEE_CHAR" parameter="true">
+    <descriptions defaultDescription=""/>
+    <variableProperties datatype="NVARCHAR" length="8" mandatory="false" defaultValue="*">
+      <valueDomain type="empty"/>
+      <selection multiLine="true" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+  <variable id="IP_TARGET_CURR" parameter="true">
+    <descriptions defaultDescription=""/>
+    <variableProperties datatype="NVARCHAR" length="3" mandatory="true" defaultValue="INR">
+      <valueDomain type="Currency"/>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+  <variable id="IP_CONV_DATE" parameter="true">
+    <descriptions defaultDescription=""/>
+    <variableProperties datatype="DATE" mandatory="true" defaultExpressionLanguage="SQL">
+      <valueDomain type="Date"/>
+      <selection multiLine="false" type="SingleValue"/>
+      <defaultRange lowValue="CURRENT_DATE" lowExpression="true"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings/>
+<dataSources>
+  <DataSource id="DIPTAMANDAS_ALAB.db.synonyms::SYN_DIM_EMPLOYEE">
+    <resourceUri>DIPTAMANDAS_ALAB.db.synonyms::SYN_DIM_EMPLOYEE</resourceUri>
+  </DataSource>
+  <DataSource id="DIPTAMANDAS_ALAB.db.synonyms::SYN_EMPLOYEE_COMPENSATION_HIST">
+    <resourceUri>DIPTAMANDAS_ALAB.db.synonyms::SYN_EMPLOYEE_COMPENSATION_HIST</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="EMPLOYEE_MASTER" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="PGEPERSID"/>
+      <viewAttribute id="EMPLOYEE_CHAR"/>
+      <viewAttribute id="EMPLOYEE_TXT_MED"/>
+      <viewAttribute id="DATEFROM"/>
+      <viewAttribute id="DATETO"/>
+      <viewAttribute id="COUNTRY_ID"/>
+      <viewAttribute id="COUNTRY_ID_TXT"/>
+      <viewAttribute id="EMPLSTATUS"/>
+      <viewAttribute id="EMPLSTATUS_TXT"/>
+      <viewAttribute id="EMPLGROUP"/>
+      <viewAttribute id="EMPLGROUP_TXT"/>
+      <viewAttribute id="COMP_CODE"/>
+      <viewAttribute id="COMP_CODE_TXT"/>
+      <viewAttribute id="PMAILCODE"/>
+      <viewAttribute id="PMAILCODE_TXT"/>
+      <viewAttribute id="JOB"/>
+      <viewAttribute id="JOB_SHORT_TXT"/>
+      <viewAttribute id="MAST_CCTR"/>
+      <viewAttribute id="MAST_CCTR_SHORT_TXT"/>
+      <viewAttribute id="MAST_CCTR_TXT"/>
+      <viewAttribute id="PFUNCTION"/>
+      <viewAttribute id="PFUNCTION_TXT"/>
+      <viewAttribute id="PLEVEL"/>
+      <viewAttribute id="PLEVEL_TXT"/>
+      <viewAttribute id="PLEVEL_DESC"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="DIPTAMANDAS_ALAB.db.synonyms::SYN_DIM_EMPLOYEE"/>
+    <filter>&quot;EMPLOYEE_CHAR&quot; IN ($$IP_EMPLOYEE_CHAR$$)</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="COMPENSTION" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="EMPLOYEE_CHAR"/>
+      <viewAttribute id="PERSONAL_YEAR"/>
+      <viewAttribute id="ANSALARY"/>
+      <viewAttribute id="CURR_ANSAL"/>
+      <viewAttribute id="PAMOUNT"/>
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="COMP_FIRST_WORKING_DAY"/>
+      <viewAttribute id="COMP_LAST_WORKING_DAY"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="DIPTAMANDAS_ALAB.db.synonyms::SYN_EMPLOYEE_COMPENSATION_HIST"/>
+    <filter>&quot;EMPLOYEE_CHAR&quot; IN ($$IP_EMPLOYEE_CHAR$$)</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="PGEPERSID"/>
+      <viewAttribute id="EMPLOYEE_CHAR"/>
+      <viewAttribute id="EMPLOYEE_TXT_MED"/>
+      <viewAttribute id="DATEFROM"/>
+      <viewAttribute id="DATETO"/>
+      <viewAttribute id="COUNTRY_ID"/>
+      <viewAttribute id="COUNTRY_ID_TXT"/>
+      <viewAttribute id="EMPLSTATUS"/>
+      <viewAttribute id="EMPLSTATUS_TXT"/>
+      <viewAttribute id="EMPLGROUP"/>
+      <viewAttribute id="EMPLGROUP_TXT"/>
+      <viewAttribute id="COMP_CODE"/>
+      <viewAttribute id="COMP_CODE_TXT"/>
+      <viewAttribute id="PMAILCODE"/>
+      <viewAttribute id="PMAILCODE_TXT"/>
+      <viewAttribute id="JOB"/>
+      <viewAttribute id="JOB_SHORT_TXT"/>
+      <viewAttribute id="MAST_CCTR"/>
+      <viewAttribute id="MAST_CCTR_SHORT_TXT"/>
+      <viewAttribute id="MAST_CCTR_TXT"/>
+      <viewAttribute id="PFUNCTION"/>
+      <viewAttribute id="PFUNCTION_TXT"/>
+      <viewAttribute id="PLEVEL"/>
+      <viewAttribute id="PLEVEL_TXT"/>
+      <viewAttribute id="PLEVEL_DESC"/>
+      <viewAttribute id="PERSONAL_YEAR"/>
+      <viewAttribute id="ANSALARY" aggregationType="sum"/>
+      <viewAttribute id="CURR_ANSAL"/>
+      <viewAttribute id="PAMOUNT" aggregationType="sum"/>
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="COMP_FIRST_WORKING_DAY"/>
+      <viewAttribute id="COMP_LAST_WORKING_DAY"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="EMPLOYEE_MASTER">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PGEPERSID" source="PGEPERSID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMPLOYEE_CHAR" source="EMPLOYEE_CHAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMPLOYEE_TXT_MED" source="EMPLOYEE_TXT_MED"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DATEFROM" source="DATEFROM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DATETO" source="DATETO"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY_ID" source="COUNTRY_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY_ID_TXT" source="COUNTRY_ID_TXT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMPLSTATUS" source="EMPLSTATUS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMPLSTATUS_TXT" source="EMPLSTATUS_TXT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMPLGROUP" source="EMPLGROUP"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMPLGROUP_TXT" source="EMPLGROUP_TXT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMP_CODE" source="COMP_CODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMP_CODE_TXT" source="COMP_CODE_TXT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PMAILCODE" source="PMAILCODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PMAILCODE_TXT" source="PMAILCODE_TXT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOB" source="JOB"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOB_SHORT_TXT" source="JOB_SHORT_TXT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MAST_CCTR" source="MAST_CCTR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MAST_CCTR_SHORT_TXT" source="MAST_CCTR_SHORT_TXT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MAST_CCTR_TXT" source="MAST_CCTR_TXT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PFUNCTION" source="PFUNCTION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PFUNCTION_TXT" source="PFUNCTION_TXT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PLEVEL" source="PLEVEL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PLEVEL_TXT" source="PLEVEL_TXT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PLEVEL_DESC" source="PLEVEL_DESC"/>
+    </input>
+    <input node="COMPENSTION">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PERSONAL_YEAR" source="PERSONAL_YEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ANSALARY" source="ANSALARY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURR_ANSAL" source="CURR_ANSAL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PAMOUNT" source="PAMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMP_FIRST_WORKING_DAY" source="COMP_FIRST_WORKING_DAY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMP_LAST_WORKING_DAY" source="COMP_LAST_WORKING_DAY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMPLOYEE_CHAR" source="EMPLOYEE_CHAR"/>
+    </input>
+    <joinAttribute name="EMPLOYEE_CHAR"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="PGEPERSID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PGEPERSID"/>
+      <keyMapping columnObjectName="Join_1" columnName="PGEPERSID"/>
+    </attribute>
+    <attribute id="EMPLOYEE_CHAR" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EMPLOYEE_CHAR"/>
+      <keyMapping columnObjectName="Join_1" columnName="EMPLOYEE_CHAR"/>
+    </attribute>
+    <attribute id="DATEFROM" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DATEFROM"/>
+      <keyMapping columnObjectName="Join_1" columnName="DATEFROM"/>
+    </attribute>
+    <attribute id="DATETO" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DATETO"/>
+      <keyMapping columnObjectName="Join_1" columnName="DATETO"/>
+    </attribute>
+    <attribute id="EMPLSTATUS" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EMPLSTATUS"/>
+      <keyMapping columnObjectName="Join_1" columnName="EMPLSTATUS"/>
+    </attribute>
+    <attribute id="EMPLSTATUS_TXT" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EMPLSTATUS_TXT"/>
+      <keyMapping columnObjectName="Join_1" columnName="EMPLSTATUS_TXT"/>
+    </attribute>
+    <attribute id="EMPLGROUP" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EMPLGROUP"/>
+      <keyMapping columnObjectName="Join_1" columnName="EMPLGROUP"/>
+    </attribute>
+    <attribute id="EMPLGROUP_TXT" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EMPLGROUP_TXT"/>
+      <keyMapping columnObjectName="Join_1" columnName="EMPLGROUP_TXT"/>
+    </attribute>
+    <attribute id="PERSONAL_YEAR" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PERSONAL_YEAR"/>
+      <keyMapping columnObjectName="Join_1" columnName="PERSONAL_YEAR"/>
+    </attribute>
+    <attribute id="CURR_ANSAL" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CURR_ANSAL"/>
+      <keyMapping columnObjectName="Join_1" columnName="CURR_ANSAL"/>
+    </attribute>
+    <attribute id="CURRENCY" order="13" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CURRENCY"/>
+      <keyMapping columnObjectName="Join_1" columnName="CURRENCY"/>
+    </attribute>
+    <attribute id="COMP_FIRST_WORKING_DAY" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COMP_FIRST_WORKING_DAY"/>
+      <keyMapping columnObjectName="Join_1" columnName="COMP_FIRST_WORKING_DAY"/>
+    </attribute>
+    <attribute id="COMP_LAST_WORKING_DAY" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COMP_LAST_WORKING_DAY"/>
+      <keyMapping columnObjectName="Join_1" columnName="COMP_LAST_WORKING_DAY"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="ANSALARY" order="10" aggregationType="sum" measureType="amount" semanticType="amount" unconverted="false">
+      <descriptions defaultDescription="ANSALARY"/>
+      <unitCurrencyAttribute attributeName="ANSALARY_CURRENCY"/>
+      <currencyConversion errorHandling="keepUnconverted" generateOutputUnitCurrencyAttribute="true" outputUnitCurrencyAttributeName="ANSALARY_CURRENCY" convert="true" accuracy="COMPATIBILITY" method="ERP" lookup="REGULAR">
+        <client>
+          <value>010</value>
+        </client>
+        <currencyConversionTables rates="DIPTAMANDAS_ALAB.db.synonyms::SYN_TCURR" configuration="DIPTAMANDAS_ALAB.db.synonyms::SYN_TCURV" prefactors="DIPTAMANDAS_ALAB.db.synonyms::SYN_TCURF" notations="DIPTAMANDAS_ALAB.db.synonyms::SYN_TCURN" precisions="DIPTAMANDAS_ALAB.db.synonyms::SYN_TCURX"/>
+        <outputDataType datatype="DECIMAL" length="15" scale="2"/>
+        <sourceCurrency>
+          <attribute attributeName="CURRENCY"/>
+        </sourceCurrency>
+        <erpDecimalShift>true</erpDecimalShift>
+        <targetCurrency>
+          <localVariable>IP_TARGET_CURR</localVariable>
+        </targetCurrency>
+        <referenceDate>
+          <localVariable>IP_CONV_DATE</localVariable>
+        </referenceDate>
+        <exchangeRateType>M</exchangeRateType>
+      </currencyConversion>
+      <measureMapping columnObjectName="Join_1" columnName="ANSALARY"/>
+    </measure>
+    <measure id="PAMOUNT" order="12" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="PAMOUNT"/>
+      <measureMapping columnObjectName="Join_1" columnName="PAMOUNT"/>
+    </measure>
+  
+    <measure id="ORIGINAL_ANSALARY" order="16" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="ANSALARY_1"/>
+      <measureMapping columnObjectName="Join_1" columnName="ANSALARY"/>
+    </measure>
+    <measure id="ORIGINAL_PAMOUNT" order="17" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="PAMOUNT_1"/>
+      <measureMapping columnObjectName="Join_1" columnName="PAMOUNT"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="221.11302679000914" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="EMPLOYEE_MASTER" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92.00000000000001" y="376.9999988079071"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="COMPENSTION" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302.00000000000006" y="376.9999988079071"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="221.11302679000914" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="EMPLOYEE_MASTER" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="188"/>
+    </shape>
+    <shape modelObjectName="COMPENSTION" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="153"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
