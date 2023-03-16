@@ -53,5 +53,19 @@
       "schema": "DIPTAMDAS",
       "database": "HWX"
     }
+  },
+  "DIPTAMANDAS_ALAB.db.synonyms::SYN_ROOP_DIM_EMPLOYEE_BIG_METRICS_PII_DAILY": {
+    "target": {
+      "object": "DIM_EMPLOYEE_BIG_METRICS_PII_DAILY",
+      "schema": "ROOCHAUDHARY",
+      "database": "HWX"
+    }
+  },
+  "DIPTAMANDAS_ALAB.db.synonyms::SYN_ROOP_DIM_EMPLOYEE_BIG_METRICS_PII_DAILY_1": {
+    "target": {
+      "object": "DIM_EMPLOYEE_BIG_METRICS_PII_DAILY_1",
+      "schema": "ROOCHAUDHARY",
+      "database": "HWX"
+    }
   }
 }

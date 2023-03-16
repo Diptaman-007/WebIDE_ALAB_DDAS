@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="DIPTAMANDAS_ALAB.db.views::CV_COMPENTATION_HISTORY" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_COMPENTATION_HISTORY"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="DIPTAMANDAS_ALAB.db.synonyms::SYN_EMPLOYEE_COMPENSATION_HIST">
+    <resourceUri>DIPTAMANDAS_ALAB.db.synonyms::SYN_EMPLOYEE_COMPENSATION_HIST</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+<logicalModel id="DIPTAMANDAS_ALAB.db.synonyms::SYN_EMPLOYEE_COMPENSATION_HIST">
+  <attributes>
+    <attribute id="EMPLOYEE_CHAR" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EMPLOYEE_CHAR"/>
+      <keyMapping columnObjectName="SYN_EMPLOYEE_COMPENSATION_HIST" columnName="EMPLOYEE_CHAR"/>
+    </attribute>
+    <attribute id="PERSONAL_YEAR" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PERSONAL_YEAR"/>
+      <keyMapping columnObjectName="SYN_EMPLOYEE_COMPENSATION_HIST" columnName="PERSONAL_YEAR"/>
+    </attribute>
+    <attribute id="ANSALARY" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ANSALARY"/>
+      <keyMapping columnObjectName="SYN_EMPLOYEE_COMPENSATION_HIST" columnName="ANSALARY"/>
+    </attribute>
+    <attribute id="PAMOUNT" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PAMOUNT"/>
+      <keyMapping columnObjectName="SYN_EMPLOYEE_COMPENSATION_HIST" columnName="PAMOUNT"/>
+    </attribute>
+    <attribute id="CURRENCY" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CURRENCY"/>
+      <keyMapping columnObjectName="SYN_EMPLOYEE_COMPENSATION_HIST" columnName="CURRENCY"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

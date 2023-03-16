@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="DIPTAMANDAS_ALAB.db.views::CV_DIM_EMPLOYEE" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_DIM_EMPLOYEE"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="DIPTAMANDAS_ALAB.db.synonyms::SYN_DIM_EMPLOYEE">
+    <resourceUri>DIPTAMANDAS_ALAB.db.synonyms::SYN_DIM_EMPLOYEE</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+<logicalModel id="DIPTAMANDAS_ALAB.db.synonyms::SYN_DIM_EMPLOYEE">
+  <attributes>
+    <attribute id="PGEPERSID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PGEPERSID"/>
+      <keyMapping columnObjectName="SYN_DIM_EMPLOYEE" columnName="PGEPERSID"/>
+    </attribute>
+    <attribute id="EMPLOYEE_CHAR" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EMPLOYEE_CHAR"/>
+      <keyMapping columnObjectName="SYN_DIM_EMPLOYEE" columnName="EMPLOYEE_CHAR"/>
+    </attribute>
+    <attribute id="DATEFROM" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DATEFROM"/>
+      <keyMapping columnObjectName="SYN_DIM_EMPLOYEE" columnName="DATEFROM"/>
+    </attribute>
+    <attribute id="DATETO" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DATETO"/>
+      <keyMapping columnObjectName="SYN_DIM_EMPLOYEE" columnName="DATETO"/>
+    </attribute>
+    <attribute id="EMPLSTATUS_TXT" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EMPLSTATUS_TXT"/>
+      <keyMapping columnObjectName="SYN_DIM_EMPLOYEE" columnName="EMPLSTATUS_TXT"/>
+    </attribute>
+    <attribute id="EMPLGROUP_TXT" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EMPLGROUP_TXT"/>
+      <keyMapping columnObjectName="SYN_DIM_EMPLOYEE" columnName="EMPLGROUP_TXT"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="DIPTAMANDAS_ALAB.db.views::CV_TEMPORAL_JOIN_TEST" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_TEMPORAL_JOIN_TEST"/>
+<localVariables>
+  <variable id="IP_PERSONAL_YEAR" parameter="true">
+    <descriptions defaultDescription=""/>
+    <variableProperties datatype="DATE" mandatory="true" defaultValue="2013">
+      <valueDomain type="Date"/>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings/>
+<dataSources>
+  <DataSource id="DIPTAMANDAS_ALAB.db.synonyms::SYN_EMPLOYEE_COMPENSATION_HIST">
+    <resourceUri>DIPTAMANDAS_ALAB.db.synonyms::SYN_EMPLOYEE_COMPENSATION_HIST</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="EMPLOYEE_CHAR"/>
+      <viewAttribute id="PERSONAL_YEAR"/>
+      <viewAttribute id="ANSALARY"/>
+      <viewAttribute id="PAMOUNT"/>
+      <viewAttribute id="CURRENCY"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="DIPTAMANDAS_ALAB.db.synonyms::SYN_EMPLOYEE_COMPENSATION_HIST"/>
+    <filter>&quot;PERSONAL_YEAR&quot; = '$$IP_PERSONAL_YEAR$$'</filter>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Projection_1">
+  <attributes>
+    <attribute id="PERSONAL_YEAR" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PERSONAL_YEAR"/>
+      <keyMapping columnObjectName="Projection_1" columnName="PERSONAL_YEAR"/>
+    </attribute>
+    <attribute id="CURRENCY" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CURRENCY"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CURRENCY"/>
+    </attribute>
+    <attribute id="EMPLOYEE_CHAR$local">
+      <descriptions defaultDescription="EMPLOYEE_CHAR"/>
+      <keyMapping columnObjectName="Projection_1" columnName="EMPLOYEE_CHAR"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="ANSALARY" order="2" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="ANSALARY"/>
+      <measureMapping columnObjectName="Projection_1" columnName="ANSALARY"/>
+    </measure>
+    <measure id="PAMOUNT" order="3" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="PAMOUNT"/>
+      <measureMapping columnObjectName="Projection_1" columnName="PAMOUNT"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+  <sharedDimensions>
+    <logicalJoin associatedObjectUri="DIPTAMANDAS_ALAB.db.views::CV_DIM_EMPLOYEE">
+      <attributes>
+        <attributeRef>EMPLOYEE_CHAR$local</attributeRef>
+      </attributes>
+      <associatedAttributeNames>
+        <attributeName>EMPLOYEE_CHAR</attributeName>
+      </associatedAttributeNames>
+      <properties cardinality="CN_N" joinType="inner" joinOperator="Equal"/>
+      <temporalJoinProperties temporalElementName="PERSONAL_YEAR" fromElementName="DATEFROM" toElementName="DATETO" temporalCondition="INCLUDE_BOTH"/>
+      <associatedAttributeFeatures/>
+    </logicalJoin>
+  </sharedDimensions>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="271"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
+      <upperLeftCorner x="556" y="39"/>
+      <rectangleSize width="183.8076171875"/>
+    </shape>
+    <shape modelObjectName="DIPTAMANDAS_ALAB.db.views::CV_DIM_EMPLOYEE" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+      <upperLeftCorner x="72" y="30"/>
+      <rectangleSize width="372.478515625"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
